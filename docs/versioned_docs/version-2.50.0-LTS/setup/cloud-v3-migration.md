@@ -1,11 +1,11 @@
 ---
 id: cloud-v3-migration
-title: ToolJet Cloud v3 Migration Guide
+title: ToolJet 3.0 Cloud Migration Guide
 ---
 
-# ToolJet Cloud v3 Migration Guide
+# ToolJet 3.0 Cloud Migration Guide
 
-ToolJet Cloud will be upgraded to v3 on November 11th, 2024. This update includes breaking changes that may affect your applications. Please review and update your applications before November 11th to ensure they continue working after the upgrade.
+ToolJet Cloud will be upgraded to 3.0 on November 11th, 2024. This update includes breaking changes that may affect your applications. Please review and update your applications before November 11th to ensure they continue working after the upgrade.
 
 :::warning Important
 
@@ -55,7 +55,7 @@ Instead, use static references to components:
 ## Component and Query Naming
 
 :::note
-This is only an issue during the upgrade process. Once your application is running on ToolJet v3, you can use identical names for components and queries without any problems.
+This is only an issue during the upgrade process. Once your application is running on ToolJet 3.0, you can use identical names for components and queries without any problems.
 :::
 
 ### Action Required
@@ -66,7 +66,7 @@ This is only an issue during the upgrade process. Once your application is runni
 
 ### Details and Examples
 
-When upgrading, if a component is referencing a query with the same name, the upgrade process may break that mapping. This occurs because ToolJet previously used a global ID-to-name map for both components and queries, which is now split in v3.
+When upgrading, if a component is referencing a query with the same name, the upgrade process may break that mapping. This occurs because ToolJet previously used a global ID-to-name map for both components and queries, which is now split in 3.0.
 
 Example scenario: If a table component named `userData` is referencing a query also named `userData`, this reference may break during the upgrade process.
 
@@ -163,6 +163,10 @@ After November 11th, applications with the old Kanban Board component will crash
 - Update all queries and components using these data sources
 - Test all affected components and queries after migration
 
+#### Action Required After Upgrade
+
+If you haven't migrated your local data sources to global data sources, you will encounter an error message indicating that local data sources are no longer supported. For detailed instructions on migrating from Local Data Sources to the new Data Sources, please refer to our [Local Data Sources Migration Guide](/docs/data-sources/local-data-sources-migration).
+
 ### Workspace Variables
 
 #### Action Required
@@ -174,7 +178,7 @@ After November 11th, applications with the old Kanban Board component will crash
 
 Workspace Constants are designed to be resolved on the server-side only, ensuring a high level of security. You can assign users to a specific role and provide create, update, and delete access to Workspace Constants.
 
-For detailed instructions on migrating from Workspace Variables to Workspace Constants, please refer to our [Workspace Variables Migration Guide](https://docs.tooljet.com/docs/beta/org-management/workspaces/workspace-variables-migration).
+For detailed instructions on migrating from Workspace Variables to Workspace Constants, please refer to our [Workspace Variables Migration Guide](/docs/org-management/workspaces/workspace-variables-migration).
 
 
 ## Response Headers and Metadata
@@ -196,7 +200,7 @@ Now, you should use:
 {{queries.<queryName>.metadata}}
 ```
 
-The `metadata` object will contain detailed information about the request and response, including request URL, method, headers, parameters, response status code, and headers. You can read more about metadata [here](/docs/beta/data-sources/restapi/metadata-and-cookies/#metadata).
+The `metadata` object will contain detailed information about the request and response, including request URL, method, headers, parameters, response status code, and headers. You can read more about metadata [here](/docs/data-sources/restapi/metadata-and-cookies/#metadata).
 
 ## Help and Support
 

@@ -1,24 +1,23 @@
 ---
 id: upgrade-to-v3
-title: ToolJet v3 (Beta) Migration Guide Self-Hosted
+title: ToolJet 3.0 Migration Guide Self-Hosted
 ---
-# ToolJet v3 (Beta) Migration Guide Self-Hosted
 
-This documentation will help you upgrade your application from ToolJet v2.50.0-LTS to the pre-release/beta version of ToolJet v3.
+This documentation will help you upgrade your application from ToolJet v2.50.0-LTS to the pre-release/beta version of ToolJet 3.0.
 
-ToolJet v3 is a new **major version**, including **breaking changes** that require you to adjust your applications accordingly. We will guide you through this process and mention a few important changes.
+ToolJet 3.0 is a new **major version**, including **breaking changes** that require you to adjust your applications accordingly. We will guide you through this process and mention a few important changes.
 
 :::tip Before upgrading
-Before upgrading, we recommend reviewing your existing applications for any usage of deprecated features. Addressing these ahead of time will help reduce the work needed to upgrade to ToolJet v3.
+Before upgrading, we recommend reviewing your existing applications for any usage of deprecated features. Addressing these ahead of time will help reduce the work needed to upgrade to ToolJet 3.0.
 
 For complex applications, we also recommend setting up thorough testing procedures to ensure your apps function correctly after the upgrade.
 :::
 
-## Upgrading to v3 Beta Preview
+## Upgrading to ToolJet 3.0 
 
 ### Prerequisites ⚠️
 
-Before attempting to upgrade to the v3 Beta Preview:
+Before attempting to upgrade to the ToolJet 3.0:
 
 - **Database Backup**: Create a complete backup of your database
 - **Application Review**: Check your apps for breaking and deprecated features listed in this guide.
@@ -27,7 +26,7 @@ Before attempting to upgrade to the v3 Beta Preview:
 To upgrade, update your Docker image to:
 
 ```bash
-tooljet/tooljet:v3.0.0-ee-beta
+tooljet/tooljet:v3.0.0-ee-lts
 ```
 :::warning
 This is a beta release. Test thoroughly in a non-production environment first.
@@ -79,7 +78,7 @@ Instead, use static references to components:
 ## Component and Query Naming
 
 :::note
-This is only an issue during the upgrade process. Once your application is running on ToolJet v3, you can use identical names for components and queries without any problems.
+This is only an issue during the upgrade process. Once your application is running on ToolJet 3.0, you can use identical names for components and queries without any problems.
 :::
 
 ### Action Required
@@ -90,7 +89,7 @@ This is only an issue during the upgrade process. Once your application is runni
 
 ### Details and Examples
 
-When upgrading, if a component is referencing a query with the same name, the upgrade process may break that mapping. This occurs because ToolJet previously used a global ID-to-name map for both components and queries, which is now split in v3.
+When upgrading, if a component is referencing a query with the same name, the upgrade process may break that mapping. This occurs because ToolJet previously used a global ID-to-name map for both components and queries, which is now split in 3.0.
 
 Example scenario: If a table component named `userData` is referencing a query also named `userData`, this reference may break during the upgrade process.
 
@@ -175,7 +174,7 @@ The old deprecated **Kanban Board** component will cease functioning entirely. A
 6. Test thoroughly to ensure all functionality is preserved
 
 :::caution
-After the V3 upgrade, applications with the old Kanban Board component will crash and become unusable. Make sure to replace all instances of the old component with the new Kanban component before upgrading.
+After the 3.0 upgrade, applications with the old Kanban Board component will crash and become unusable. Make sure to replace all instances of the old component with the new Kanban component before upgrading.
 :::
 
 ### Local Data Sources
@@ -185,6 +184,10 @@ After the V3 upgrade, applications with the old Kanban Board component will cras
 - Migrate them to global workspace data sources
 - Update all queries and components using these data sources
 - Test all affected components and queries after migration
+
+#### Action Required After Upgrade
+
+If you haven't migrated your local data sources to global data sources, you will encounter an error message indicating that local data sources are no longer supported. For detailed instructions on migrating from Local Data Sources to the new Data Sources, please refer to our [Local Data Sources Migration Guide](/docs/data-sources/local-data-sources-migration).
 
 ### Workspace Variables
 
@@ -197,7 +200,7 @@ After the V3 upgrade, applications with the old Kanban Board component will cras
 
 Workspace Constants are designed to be resolved on the server-side only, ensuring a high level of security. You can assign users to a specific role and provide create, update, and delete access to Workspace Constants.
 
-For detailed instructions on migrating from Workspace Variables to Workspace Constants, please refer to our [Workspace Variables Migration Guide](https://docs.tooljet.com/docs/beta/org-management/workspaces/workspace-variables-migration).
+For detailed instructions on migrating from Workspace Variables to Workspace Constants, please refer to our [Workspace Variables Migration Guide](/docs/org-management/workspaces/workspace-variables-migration).
 
 
 ## Response Headers and Metadata
@@ -219,21 +222,20 @@ Now, you should use:
 {{queries.<queryName>.metadata}}
 ```
 
-The `metadata` object will contain detailed information about the request and response, including request URL, method, headers, parameters, response status code, and headers. You can read more about metadata [here](/docs/beta/data-sources/restapi/metadata-and-cookies/#metadata).
+The `metadata` object will contain detailed information about the request and response, including request URL, method, headers, parameters, response status code, and headers. You can read more about metadata [here](/docs/data-sources/restapi/metadata-and-cookies/#metadata).
 
 ## System Changes
 
 ### ToolJet Database
 
-ToolJet Database is now a core requirement for the v3 beta. You'll need to manually enable the ToolJet Database feature at the instance level. This is a temporary requirement - in the final v3.0 LTS release, the ToolJet Database will be automatically enabled and configured by default.
+ToolJet Database is now a core requirement for the ToolJet 3.0. 
+To use ToolJet Database, you'd have to set up and deploy PostgREST server which helps querying ToolJet Database. <br/>
+Please check the environment variables that you need to configure to set up:
+- [PostgREST](/docs/setup/env-vars#postgrest-server-required)
+- [ToolJet Database](/docs/setup/env-vars#enable-tooljet-database-required)
 
-#### Beta Testing Requirements
+<!-- Don't use relative path. Needs to redirect to current docs instead of versioned -->
 
-- Enable ToolJet Database for your instance (see required environment variables [here](/docs/beta/setup/env-vars/#enable-tooljet-database--optional-))
-
-:::note
-This manual configuration is only needed during the beta testing phase. When v3.0 LTS is released, the ToolJet Database will be automatically enabled and ready to use out of the box.
-:::
 
 ## Help and Support
 
