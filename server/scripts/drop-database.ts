@@ -57,8 +57,11 @@ function dropDb(envVars, dbName) {
     const errorMessage = `database "${dbName}" does not exist`;
 
     if (error.message.includes(errorMessage)) {
+      console.log(`Database Name: ${dbName}, Host: ${envVars.PG_HOST}, PORT: ${envVars.PG_PORT}, USER: ${envVars.PG_USER}`);
+      console.log(error);
       console.log(errorMessage);
     } else {
+      console.log(error);
       console.error(errorMessage);
       process.exit(1);
     }

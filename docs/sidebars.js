@@ -68,7 +68,9 @@ const sidebars = {
         'setup/http-proxy',
         'setup/tooljet-subpath',
         'setup/v2-migration-guide',
-        'setup/upgrade-to-lts'
+        'setup/upgrade-to-lts',
+        'setup/upgrade-to-v3',
+        'setup/cloud-v3-migration',
       ]
     },
     {
@@ -115,7 +117,8 @@ const sidebars = {
                   'label': 'Chart',
                   'items': [
                     'widgets/chart/chart-properties',
-                    'widgets/chart/chart-examples'
+                    'widgets/chart/chart-examples',
+                    'widgets/chart/transforming-data-for-charts'
                   ]
                 },
                 'widgets/checkbox',
@@ -159,6 +162,17 @@ const sidebars = {
                     'widgets/table/table-properties',
                     'widgets/table/table-columns',
                     'widgets/table/table-csa-and-variables',
+                    {
+                      'type': 'category',
+                      'label': 'Serverside Operations',
+                      'items': [
+                        'widgets/table/serverside-operations/overview',
+                        'widgets/table/serverside-operations/search',
+                        'widgets/table/serverside-operations/sort',
+                        'widgets/table/serverside-operations/filter',
+                        'widgets/table/serverside-operations/pagination'
+                      ]
+                    }
                   ]
                 },
                 'widgets/tabs',
@@ -218,6 +232,8 @@ const sidebars = {
         'how-to/use-url-params-on-load',
         'how-to/pass-query-params-in-custom-components',
         'how-to/use-custom-parameters',
+        'how-to/pass-values-in-rest-api',
+        'how-to/build-dynamic-forms',
         'how-to/setup-rsyslog',
         'how-to/conditionally-display-components',
         'how-to/use-inspector',
@@ -287,7 +303,18 @@ const sidebars = {
             'data-sources/oracledb',
             'data-sources/postgresql',
             'data-sources/redis',
-            'data-sources/restapi',
+            {
+              'type': 'category',
+              'label': 'REST API',
+              'collapsed': false,
+              'items': [
+                'data-sources/restapi/configuration',
+                'data-sources/restapi/authentication',
+                'data-sources/restapi/querying-rest-api',
+                'data-sources/restapi/metadata-and-cookies',
+
+              ],
+            },
             'data-sources/rethinkdb',
             'data-sources/run-js',
             'data-sources/run-py',
@@ -364,8 +391,10 @@ const sidebars = {
                     'user-authentication/sso/openid/google-openid',
                   ],
                 },
+                'user-authentication/sso/oidc',
                 'user-authentication/sso/ldap',
                 'user-authentication/sso/saml',
+                'user-authentication/sso/auto-sso-login',
               ],
             },
           ],
@@ -429,7 +458,9 @@ const sidebars = {
             'marketplace/plugins/marketplace-plugin-salesforce',
             'marketplace/plugins/marketplace-plugin-supabase',
             'marketplace/plugins/marketplace-plugin-pocketbase',
+            'marketplace/plugins/marketplace-plugin-portkey',
             'marketplace/plugins/marketplace-plugin-prestodb',
+            'marketplace/plugins/marketplace-plugin-jira',
           ],
         },
       ],
@@ -478,6 +509,16 @@ const sidebars = {
           'items': [
             'contributing-guide/marketplace/marketplace-setup',
             'contributing-guide/marketplace/creating-a-plugin',
+          ],
+        },
+        {
+          'type': 'category',
+          'label': 'Documentation',
+          'items': [
+            'contributing-guide/documentation-guidelines/introduction',
+            'contributing-guide/documentation-guidelines/pr-checklist',
+            'contributing-guide/documentation-guidelines/style-guide',
+
           ],
         },
         'tooljet-cli',
