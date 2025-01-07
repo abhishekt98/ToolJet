@@ -28,6 +28,7 @@ if [ -n "$DATABASE_URL" ]; then
     # echo  "PG_USER: $PG_USER"
     # echo  "PG_PASS: $PG_PASS"
     # echo  "PG_HOST: $PG_HOST"
+    export TEST_ENV_IGNORe="test-value"
 
 else
     echo "DATABASE_URL is not set. Exiting."
