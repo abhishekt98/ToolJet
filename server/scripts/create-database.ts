@@ -56,6 +56,8 @@ function executeCreateDb(host: string, port: string, user: string, password: str
   const env = Object.assign({}, process.env, { PGPASSWORD: password });
   const createDbArgs = ['-h', host, '-p', port, '-U', user, dbName];
   const options = { env, stdio: 'pipe' } as ExecFileSyncOptions;
+  console.log("===================> executCreateDb")
+  console.log({host,port,user,password,dbName})
 
   execFileSync('createdb', createDbArgs, options);
 }
@@ -83,6 +85,13 @@ async function createTooljetDb(envVars, dbName): Promise<void> {
   }
 
   try {
+    console.log("================> Precheck")
+    console.log(envVars.TOOLJET_DB_HOST,
+      envVars.TOOLJET_DB_PORT,
+      envVars.TOOLJET_DB_USER,
+      envVars.TOOLJET_DB_PASS,
+      dbName)
+
     executeCreateDb(
       envVars.TOOLJET_DB_HOST,
       envVars.TOOLJET_DB_PORT,
@@ -94,6 +103,7 @@ async function createTooljetDb(envVars, dbName): Promise<void> {
     if (error.message.includes(`database "${dbName}" already exists`)) {
       console.log(`Using Tooljet database\nTOOLJET_DB: ${dbName}\nTOOLJET_DB_HOST: ${envVars.TOOLJET_DB_HOST}\n`);
     } else {
+      console.log("===============> Failed to create tooljet_db")
       throw error;
     }
   }
